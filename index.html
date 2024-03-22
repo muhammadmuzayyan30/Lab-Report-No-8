@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!--Custom Javascript-->
+    <script src="pages/cart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/cartstyle.css">
+    <title>Cart</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Quench Your Thirst</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Select City
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Peshawar</a></li>
+                            <li><a class="dropdown-item" href="#">Islamabad</a></li>
+                            <li><a class="dropdown-item" href="#">lahore</a></li>
+                            <li><a class="dropdown-item" href="#">karachi</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Other</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-flex flex-row me-1 ml-auto">
+                    <li class="nav-item me-3 me-lg-0">
+                        <div class="shopping-cart">
+                            <a href="#view-cart-btn">
+                                <i class="fa fa-shopping-cart fa-2x" aria-hidden="true">
+                                    <span class="badge">0</span>
+                                </i>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Cards -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Card 1: Burger -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="images/buger.jpg" alt="Burger">
+                    <div class="card-body">
+                        <h5 class="card-title">Burger</h5>
+                        <p class="card-text">Indulge in our classic beef burger, featuring a juicy, perfectly grilled
+                            patty, topped with crisp lettuce, ripe tomato, and melted cheese, all encased in a soft,
+                            toasted sesame bun. Ideal for a satisfying meal.</p>
+                        <p class="price-tag">Price: $9.7</p>
+                        <button type="button" class="btn btn-primary" onclick="addToCart('Burger', 6.7)">Add to
+                            Cart</button>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Pomegranate Juice -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="images/pomegranate.jpg" alt="Pomegranate Juice">
+                    <div class="card-body">
+                        <h5 class="card-title">Pomegranate Juice</h5>
+                        <p class="card-text">Experience the refreshing taste of our freshly squeezed pomegranate juice.
+                            Rich in antioxidants, it's a delicious health boost any time of the day. Served chilled for
+                            the perfect energizing drink.</p>
+                        <p class="price-tag">Price: $4.76</p>
+                        <button type="button" class="btn btn-primary" onclick="addToCart('Pomegranate Juice', 9.76)">Add
+                            to Cart</button>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Coffee -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="images/coffee.jpg" alt="Coffee">
+                    <div class="card-body">
+                        <h5 class="card-title">Coffee</h5>
+                        <p class="card-text">Kick start your day with our rich and aromatic coffee. Made from premium
+                            quality beans, our coffee offers a perfect balance of flavor and intensity, complemented by
+                            a smooth, velvety finish.</p>
+                        <p class="price-tag">Price: $3.99</p>
+                        <button type="button" class="btn btn-primary" onclick="addToCart('Coffee', 2.99)">Add to
+                            Cart</button>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 10 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="view-cart-btn" onclick="showCart()">View Cart</button>
+
+    <div class="cart-section" style="display: none;">
+        <div class="container" id="cartItems">
+            <h2>Your Cart</h2>
+            <ul class="list-group" id="cart-list">
+            </ul>
+            <div class="total-container">
+                <h3>Total: $<span id="total-price">0</span></h3>
+            </div>
+            <button onclick="hideCart()">Close Cart</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var cartCount = 0;
+            var totalPrice = 0;
+            var cartItems = [];
+
+            window.addToCart = function (itemName, price) {
+                cartCount++;
+                totalPrice += price;
+                cartItems.push({ name: itemName, price: price });
+                updateCartDisplay();
+            }
+
+            function updateCartDisplay() {
+                var badge = document.querySelector('.shopping-cart .badge');
+                if (badge) {
+                    badge.textContent = cartCount;
+                }
+
+                var cartList = document.getElementById('cart-list');
+                if (cartList) {
+                    cartList.innerHTML = ''; // Clear existing items
+                    cartItems.forEach(item => {
+                        var listItem = document.createElement('li');
+                        listItem.className = 'list-group-item';
+                        listItem.textContent = item.name + ' - $' + item.price.toFixed(2);
+                        cartList.appendChild(listItem);
+                    });
+                }
+
+                var totalPriceElement = document.getElementById('total-price');
+                if (totalPriceElement) {
+                    totalPriceElement.textContent = totalPrice.toFixed(2);
+                }
+            }
+
+            window.showCart = function () {
+                $(".cart-section").fadeIn();
+            }
+
+            window.hideCart = function () {
+                $(".cart-section").fadeOut();
+            }
+        });
+    </script>
+
+
+    <!-- Bootstrap and jQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
